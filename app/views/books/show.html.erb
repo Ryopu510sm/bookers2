@@ -1,0 +1,55 @@
+<!--bookのindexページの左側の作成(User info)-->
+<h1>User info</h1>
+
+<% if user_signed_in? %> <!-- ログイン中のユーザーかどうかを確認 -->
+  <p>Welcome！You have signed up successfully.</p>
+<% end %>
+
+<p>name</p>
+<%= @user.name %>
+<p>introduction</p>
+<%= @user.introduction %>
+
+
+<h3>New book</h3>
+<%= form_with model: @newbook do |f| %>
+  <p>Title</p>
+  <%= f.text_field :title %>
+  <p>Opinion</p>
+  <%= f.text_area :body %>
+  <%= f.submit 'Create Book' %>
+<% end %>
+
+
+
+
+<!--bookのshowページの右側の作成(Books)-->
+<h3>Book detail</h3>
+<%= form_with model: @book, url: books_path, method: :post do |f| %>
+<p>Title: <%= @book.title %></p>
+<p>Body: <%= @book.body %></p>
+
+<!--% @book.current_user do |book| %-->
+  <!--%= link_to book.title, book_path(book) %-->
+  
+<% end %>
+
+
+
+
+
+    <!--%= form_with model: @book do |f| %-->
+   
+    <!--%= @book.title %-->
+    <!--%= @book.body %-->
+    <!--% end %-->
+
+
+
+
+
+<h1>Books#show</h1>
+<p>Find me in app/views/books/show.html.erb</p>
+
+<!--Prefix Verb   URI Pattern                  Controller#Action
+<!--book GET    /books/:id(.:format)          books#show-->

@@ -1,0 +1,16 @@
+<!--一旦置いとく-->
+
+<h3>New book</h3>
+<%= form_with model: @book do |f| %>
+<p>Title</p>
+<%= f.text_field :title %>
+<p>Opinion</p>
+<%= f.text_area :body %>
+<%= f.submit 'Create Book' %>
+
+
+
+
+
+<h1>Books#new</h1>
+<p>Find me in app/views/books/new.html.erb</p>

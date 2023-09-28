@@ -1,0 +1,20 @@
+<h3>User info</h3>
+<%= form_with model: @user do |f| %>
+<p>name</p>
+<!--<%= f.text_field :title %>-->
+<p>introduction</p>
+
+<h3>New book</h3>
+<%= form_with model: @book do |f| %>
+<p>Title</p>
+<%= f.text_field :title %>
+<p>Opinion</p>
+<%= f.text_area :body %>
+<%= f.submit 'Create Book' %>
+<% end %>
+
+
+
+
+<h1>Homes#about</h1>
+<p>Find me in app/views/homes/about.html.erb</p>

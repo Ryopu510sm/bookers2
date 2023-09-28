@@ -1,0 +1,72 @@
+<!--bookのindexページの左側の作成(User info)-->
+<h1>User info</h1>
+
+<% if user_signed_in? %> <!-- ログイン中のユーザーかどうかを確認 -->
+  <p>Welcome！You have signed up successfully.</p>
+<% end %>
+
+<%= form_for(@user) do |f| %>  
+  <p>プロフィール画像</p>
+<% if user.profile_image.attached? %>
+  <%= image_tag user.profile_image, size: "200x200", alt: "ユーザーのプロフィール画像" %>
+<% else %>
+  <%= image_tag 'no_image.png', size: "200x200", alt: "デフォルトのプロフィール画像" %>
+<% end %>
+<% end %>
+
+
+
+<p>name</p>
+<%= @user.name %>
+<p>introduction</p>
+<%= @user.introduction %>
+<a>UserSetting</a>
+
+<h3>New book</h3>
+<% if @newbook.errors.any? %>
+  <%= @newbook.errors.count %>error prohibited this obj from being saved:
+  <ul>
+    <% @newbook.errors.full_messages.each do |message| %>
+      <li><%= message %></li>
+    <% end %>
+  </ul>
+<% end %>
+
+<%= form_with model: @newbook do |f| %>
+  <p>Title</p>
+  <%= f.text_field :title %>
+  <p>Opinion</p>
+  <%= f.text_area :body %>
+  <%= f.submit 'Create Book' %>
+<% end %>
+
+
+
+<!--bookのindexページの右側の作成(Books)-->
+<table>
+  <tr>
+    <th> </th>
+    <th>Title</th>
+    <th>Opinion</th>
+  </tr>
+  <tr>
+    <% @books.each do |book| %>
+      <!--<td><span><!--%= link_to user_image, user_path(user.id) %></span></td>-->
+      <td><span><%= link_to book.title, book_path(book.id) %></span></td>
+      <td><span><%= book.body %></span></td>
+    <% end %>
+  </tr>
+</table>
+
+
+
+
+
+<h1>Books#index</h1>
+<p>Find me in app/views/books/index.html.erb</p>
+
+
+<!--Prefix： books-->
+<!--Verb：GET-->
+<!--URI Pattern ：/books(.:format)  -->
+<!--Controller#Action:books#index-->
