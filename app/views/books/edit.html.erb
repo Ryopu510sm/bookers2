@@ -1,16 +1,28 @@
-<h3>Editing Book</h3>
-<p>Title</p>
-<%= @book.title %>
-<p>Opinion</p>
-<%= @book.body %>
-
-<%= link_to "Show"
-｜
-<%= link_to "Back",books_path %>
-Show | Back
-
-
-
-
-<h1>Books#edit</h1>
-<p>Find me in app/views/books/edit.html.erb</p>
+<div class="btn-wrapper col-10 mx-auto"> 
+  <div class="row　mx-auto">
+    <div class="mx-auto col-6">
+    
+    <h1>Editing Book</h1>
+      <% if @book.errors.any? %>
+      <%= @book.errors.count %>error prohibited this obj from being saved:
+        <ul>
+          <% @book.errors.full_messages.each do |message| %>
+            <li><%= message %></li>
+          <% end %>
+        </ul>
+      <% end %>
+    <%= form_with model: @book do |f| %>
+    <p>Title</p>
+      <%= f.text_field :title %>
+    <p>Opinion</p>
+      <%= f.text_area :body, maxlength: 200, maximum: 200 %> <br>
+      <%= f.submit 'Update Book', class: "btn btn-success" %> <br>
+    
+      <%= link_to "Show",book_path %>
+      ｜
+      <%= link_to "Back",books_path %>
+    <% end %>
+    
+    </div>
+  </div>
+</div>

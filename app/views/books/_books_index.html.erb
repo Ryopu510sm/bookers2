@@ -1,0 +1,66 @@
+<!-- ログイン中のユーザーかどうかを確認 -->
+<% if user_signed_in? %> 
+  <p>Welcome！You have signed up successfully.</p>
+<% else %>
+  <p><%= flash[:notice] %></p>
+<% end %>
+    
+<div class="container book-container px-5 px-sm-0">
+  <div class="row">
+    <div class="col-md-3">
+
+  <h1>User info</h1>
+    <table class="table">
+      <thead>
+        <tr>
+          <%= form_for(user) do |f| %>  
+            <p>プロフィール画像</p>
+          <% if user.profile_image.attached? %>
+            <%= image_tag user.profile_image, size: "200x200", alt: "ユーザーのプロフィール画像" %>
+          <% else %>
+            <%= image_tag 'no_image.jpg', size: "200x200", alt: "デフォルトのプロフィール画像" %>
+          <% end %>
+          <% end %>
+        </tr>
+        </thead>
+        
+        <tbody>
+          <tr>
+            <th><p>name</p></th>
+            <td><%= user.name %></td>
+          </tr>
+          <tr>
+            <th><p>introduction</p></th>
+            <td><%= user.introduction %></td>
+          </tr>
+        </tbody>
+      </table>
+      <div class="row">
+    <div class="d-grid gap-2 col-6 mx-auto">
+        <!--%= link_to "UserSetting", @user.edit_user_path, class: "btn btn-light" %-->
+        <%= link_to edit_user_path(user.id), class: "btn btn-outline-secondary btn-lg" do %>
+          <i class="fa-solid fa-user-gear"></i>
+          <!--fa-solid.fa-user-cogおよびfas.fa-user-cog-->
+        <% end %>
+    </div>  
+    </div>
+  
+  <h1>New book</h1>
+    <% if newbook.errors.any? %>
+      <%= newbook.errors.count %>error prohibited this obj from being saved:
+      <ul>
+        <% newbook.errors.full_messages.each do |message| %>
+          <li><%= message %></li>
+        <% end %>
+      </ul>
+    <% end %>
+  
+    <%= form_with model: newbook do |f| %>
+      <p>Title</p>
+      <%= f.text_field :title %>
+      <p>Opinion</p>
+      <%= f.text_area :body, maxlength: 200, maximum: 200 %>
+      <%= f.submit 'Create Book', class: "btn btn-success btn-lg" %>
+    <% end %>
+  </div>
+

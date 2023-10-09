@@ -4,30 +4,35 @@ class UsersController < ApplicationController
   
   def new
   end
-
-  #def index
-    #@user = User.find(params[:user_id])
-    
-  #end
-
-  #def show
-   # @user = User.find(params[:user_id])
-
-    #@profile_images = @user.profile_images 
-    #@books = @user.books  
-    #@post_images = @user.post_images.page(params[:page])
-  #end
   
+
+
+  def index
+    @users = User.all
+    @newbook = Book.new # 空のインスタンス
+    @user = current_user
+  
+    if user_signed_in? # ユーザーがログインしている場合
+      # ログインメッセージを表示
+      flash[:notice] = 'Welcome! You have signed up successfully.'
+    else
+      redirect_to root_path # ユーザーがログインしていない場合はTopページにリダイレクト
+    end
+  end
+
   def show
-    redirect_to books_path
+   @user = User.find(params[:id])
+
+    @profile_image = @user.profile_image
+    @newbook =Book.new#空のインスタ
+    @books = @user.books  
+    #@post_images = @user.post_images.page(params[:page])
   end
 
 
-  
-
   def edit
     @user = User.find(params[:id])
-    redirect_to books_path
+    #redirect_to books_path
   end
 
 
@@ -42,22 +47,24 @@ class UsersController < ApplicationController
     end
   end
 
-
   def destroy
+    session[:user_id] = nil
+    redirect_to root_path
   end
-  
-  private
 
+
+  private
   def user_params
     params.require(:user).permit(:name, :profile_image, :introduction)
   end
    
   def is_matching_login_user
-    user = User.find(params[:id])
-    unless user.id == current_user.id
-      redirect_to post_images_path
+    #user_id = params[:id]
+    @user = User.find(params[:id])
+    #login_user_id = current_user.id
+    if(@user != current_user)
+      redirect_to user_path(current_user)
     end
   end
-  
   
 end

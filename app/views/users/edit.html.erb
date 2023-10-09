@@ -1,4 +1,9 @@
-<h3>User info</h3>
+<div class="btn-wrapper col-10 mx-auto"> 
+<div class="row　mx-auto">
+<div class="mx-auto col-6">
+     
+     
+<h1>User info</h1>
 <% if @user.errors.any? %>
   <%= @user.errors.count %>error prohibited this obj from being saved:
   <ul>
@@ -15,15 +20,10 @@
 <p>Image</p>
  <%= f.file_field :profile_image, accept: "image/*" %>
 <p>Introduction</p>
-<%= f.text_field :introduction %>
+<%= f.text_area :introduction %> <br>
 
-
- <%= f.submit 'Update User' %>
+ <%= f.submit 'Update User', class: "btn btn-secondary" %>
  <% end %>
-
-
-
-
-
-<h1>Users#edit</h1>
-<p>Find me in app/views/users/edit.html.erb</p>
+</div>
+</div>
+</div>

@@ -1,2 +1,39 @@
-<h1>Users#index</h1>
-<p>Find me in app/views/users/index.html.erb</p>
+<!--bookのindexページの左側の作成(User info)-->
+<%= render '/books/books_index', user: @user, newbook: @newbook %>
+
+
+
+
+<!--bookのshowページの右側の作成(Books)-->
+<div class="col-md-8 offset-md-1">
+  <h1>Users</h1>
+    <table class="table">
+      <thead>
+        <tr>
+          <th>image</th>
+          <th>Name</th>
+          <th></th>
+        </tr>
+      </thead>
+      <tbody>
+        <% @users.each do |user| %>
+          <tr>
+            <td>
+              <% if user.profile_image.attached? %>
+                <%= image_tag user.profile_image, size: "100x100", alt: "ユーザーのプロフィール画像" %>
+              <% else %>
+                <%= image_tag 'no_image.png', size: "100x100", alt: "デフォルトのプロフィール画像" %>
+              <% end %>
+            </td>
+    
+            <td><%= user.name %></td>
+            <td><%= link_to "Show",user_path(user.id) %></td>
+          </tr>
+        <% end %>
+      </tbody>
+    </table>
+
+</div>
+</div>
+</div>
+
